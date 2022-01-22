@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		25A52C46279BB5FE008B6AAD /* CountryFlagViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A52C43279BB5FE008B6AAD /* CountryFlagViewModel.swift */; };
-		25A52C47279BB5FE008B6AAD /* CountriesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A52C44279BB5FE008B6AAD /* CountriesListViewModel.swift */; };
-		25A52C48279BB5FE008B6AAD /* CountryDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A52C45279BB5FE008B6AAD /* CountryDetailsViewModel.swift */; };
 		25A52C65279BB923008B6AAD /* CountriesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A52C64279BB923008B6AAD /* CountriesList.swift */; };
 		25A52C67279BB945008B6AAD /* CountryDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A52C66279BB945008B6AAD /* CountryDetails.swift */; };
 		25A52C69279BB95F008B6AAD /* FlagDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A52C68279BB95F008B6AAD /* FlagDetailsView.swift */; };
@@ -19,6 +16,9 @@
 		25A52C6F279BBA71008B6AAD /* Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A52C5E279BB772008B6AAD /* Routing.swift */; };
 		25A52C71279BBC7D008B6AAD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A52C70279BBC7C008B6AAD /* ContentView.swift */; };
 		25A52C73279BBDB2008B6AAD /* ImageWebRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A52C72279BBDB2008B6AAD /* ImageWebRepository.swift */; };
+		25A52C78279BC57B008B6AAD /* CountryFlagViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A52C75279BC57B008B6AAD /* CountryFlagViewModel.swift */; };
+		25A52C79279BC57B008B6AAD /* CountriesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A52C76279BC57B008B6AAD /* CountriesListViewModel.swift */; };
+		25A52C7A279BC57B008B6AAD /* CountryDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A52C77279BC57B008B6AAD /* CountryDetailsViewModel.swift */; };
 		52333A932654463B0034072B /* UIOpenURLContext_Init.m in Sources */ = {isa = PBXBuildFile; fileRef = 52333A922654463B0034072B /* UIOpenURLContext_Init.m */; };
 		F60829712369CE0100DB292E /* RequestMocking.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60829702369CE0100DB292E /* RequestMocking.swift */; };
 		F60829732369CE5300DB292E /* MockedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60829722369CE5300DB292E /* MockedResponse.swift */; };
@@ -109,9 +109,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		25A52C43279BB5FE008B6AAD /* CountryFlagViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryFlagViewModel.swift; sourceTree = "<group>"; };
-		25A52C44279BB5FE008B6AAD /* CountriesListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountriesListViewModel.swift; sourceTree = "<group>"; };
-		25A52C45279BB5FE008B6AAD /* CountryDetailsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryDetailsViewModel.swift; sourceTree = "<group>"; };
 		25A52C5B279BB772008B6AAD /* InteractorsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractorsContainer.swift; sourceTree = "<group>"; };
 		25A52C5C279BB772008B6AAD /* DependencyInjector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyInjector.swift; sourceTree = "<group>"; };
 		25A52C5D279BB772008B6AAD /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
@@ -121,6 +118,9 @@
 		25A52C68279BB95F008B6AAD /* FlagDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlagDetailsView.swift; sourceTree = "<group>"; };
 		25A52C70279BBC7C008B6AAD /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		25A52C72279BBDB2008B6AAD /* ImageWebRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageWebRepository.swift; sourceTree = "<group>"; };
+		25A52C75279BC57B008B6AAD /* CountryFlagViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryFlagViewModel.swift; sourceTree = "<group>"; };
+		25A52C76279BC57B008B6AAD /* CountriesListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountriesListViewModel.swift; sourceTree = "<group>"; };
+		25A52C77279BC57B008B6AAD /* CountryDetailsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryDetailsViewModel.swift; sourceTree = "<group>"; };
 		52333A90265445F30034072B /* UnitTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UnitTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		52333A91265445F30034072B /* UIOpenURLContext_Init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIOpenURLContext_Init.h; sourceTree = "<group>"; };
 		52333A922654463B0034072B /* UIOpenURLContext_Init.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIOpenURLContext_Init.m; sourceTree = "<group>"; };
@@ -228,15 +228,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		25A52C42279BB5FE008B6AAD /* ViewModels */ = {
+		25A52C74279BC57B008B6AAD /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				25A52C43279BB5FE008B6AAD /* CountryFlagViewModel.swift */,
-				25A52C44279BB5FE008B6AAD /* CountriesListViewModel.swift */,
-				25A52C45279BB5FE008B6AAD /* CountryDetailsViewModel.swift */,
+				25A52C75279BC57B008B6AAD /* CountryFlagViewModel.swift */,
+				25A52C76279BC57B008B6AAD /* CountriesListViewModel.swift */,
+				25A52C77279BC57B008B6AAD /* CountryDetailsViewModel.swift */,
 			);
-			name = ViewModels;
-			path = "../../../developer/clean-architecture-swiftui-master/CountriesSwiftUI/UI/ViewModels";
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		F60829742369D55700DB292E /* Repositories */ = {
@@ -352,7 +351,7 @@
 			isa = PBXGroup;
 			children = (
 				F661F2B7237738CE0014E142 /* RootViewModifier.swift */,
-				25A52C42279BB5FE008B6AAD /* ViewModels */,
+				25A52C74279BC57B008B6AAD /* ViewModels */,
 				F62822B523647F8300823BA1 /* Screens */,
 				F62822B623647FA700823BA1 /* Components */,
 			);
@@ -663,14 +662,13 @@
 			files = (
 				F6238A952444627D00DD30EA /* CountriesDBRepository.swift in Sources */,
 				F6863E462364FCC800E9B227 /* MockedData.swift in Sources */,
+				25A52C78279BC57B008B6AAD /* CountryFlagViewModel.swift in Sources */,
 				F64495E52360D66400C9BB1F /* AppDelegate.swift in Sources */,
-				25A52C47279BB5FE008B6AAD /* CountriesListViewModel.swift in Sources */,
 				F6218DB623634D4100917938 /* ErrorView.swift in Sources */,
 				25A52C6F279BBA71008B6AAD /* Routing.swift in Sources */,
 				F674964A244B059A00E1D76B /* LazyList.swift in Sources */,
 				F6238A9624449DC200DD30EA /* db_model_v1.xcdatamodeld in Sources */,
 				F6218DB22362FD3100917938 /* CountryCell.swift in Sources */,
-				25A52C46279BB5FE008B6AAD /* CountryFlagViewModel.swift in Sources */,
 				25A52C67279BB945008B6AAD /* CountryDetails.swift in Sources */,
 				F67DBD5223663BCD00C83258 /* SystemEventsHandler.swift in Sources */,
 				F695DF8624559F8D00A65A04 /* PushNotificationsHandler.swift in Sources */,
@@ -684,8 +682,8 @@
 				25A52C73279BBDB2008B6AAD /* ImageWebRepository.swift in Sources */,
 				F60B5E412438DAF6009BCBB3 /* NetworkingHelpers.swift in Sources */,
 				F64495E72360D66400C9BB1F /* SceneDelegate.swift in Sources */,
-				25A52C48279BB5FE008B6AAD /* CountryDetailsViewModel.swift in Sources */,
 				F67F62B52443276000A6ED11 /* Models+CoreData.swift in Sources */,
+				25A52C7A279BC57B008B6AAD /* CountryDetailsViewModel.swift in Sources */,
 				25A52C6C279BBA5E008B6AAD /* DependencyInjector.swift in Sources */,
 				F67DBD652368875A00C83258 /* CountriesWebRepository.swift in Sources */,
 				F644960C2360EAD000C9BB1F /* APICall.swift in Sources */,
@@ -694,6 +692,7 @@
 				F695DF8B2455B04100A65A04 /* UserPermissionsInteractor.swift in Sources */,
 				F68B530C23771A9400D6337C /* ImagesInteractor.swift in Sources */,
 				F6C1F9D723CE3034005A98C8 /* SearchBar.swift in Sources */,
+				25A52C79279BC57B008B6AAD /* CountriesListViewModel.swift in Sources */,
 				F6BDB91823637C5F003E69F2 /* ActivityIndicatorView.swift in Sources */,
 				F695DF892455AD9300A65A04 /* DeepLinksHandler.swift in Sources */,
 				F6238A91244337D400DD30EA /* CoreDataHelpers.swift in Sources */,
