@@ -47,7 +47,7 @@ struct RealDeepLinksHandler: DeepLinksHandler {
             let routeToDestination = {
                 self.container.appState.bulkUpdate {
                     $0.routing.countriesList.countryDetails = alpha3Code
-                    $0.routing.countryDetails.detailsSheet = true
+                    $0.routing.countryDetails.flag = true
                 }
             }
             /*

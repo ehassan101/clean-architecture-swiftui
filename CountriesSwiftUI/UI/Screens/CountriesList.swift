@@ -11,12 +11,22 @@ import Combine
 
 struct CountriesList: View {
     
+    @ObservedObject var viewModel: CountriesListViewModel
     @State private var countriesSearch = CountriesSearch()
     @State private(set) var countries: Loadable<LazyList<Country>>
-    @State private var routingState: Routing = .init()
+   /* @State private var routingState: Routing = .init()
     private var routingBinding: Binding<Routing> {
-        $routingState.dispatched(to: injected.appState, \.routing.countriesList)
-    }
+       return $routingState.dispatched(to: injected.appState, \.routing.countriesList)
+     /*   Binding {
+            //return routingState
+            return injected.appState.value.routing.countriesList //[\.routing.countriesList]
+        } set: {
+            print("bbbbbbbbbbb \($0)")
+            injected.appState[\.routing.countriesList] = $0
+            //routingState = $0
+        } */
+
+    }*/
     @State private var canRequestPushPermission: Bool = false
     @Environment(\.injected) private var injected: DIContainer
     @Environment(\.locale) private var locale: Locale
@@ -24,24 +34,24 @@ struct CountriesList: View {
     
     let inspection = Inspection<Self>()
     
-    init(countries: Loadable<LazyList<Country>> = .notRequested) {
+    init(countries: Loadable<LazyList<Country>> = .notRequested, viewModel: CountriesListViewModel) {
+        self.viewModel = viewModel
         self._countries = .init(initialValue: countries)
     }
     
     var body: some View {
-        GeometryReader { geometry in
-            NavigationView {
+        NavigationView {
+            ScrollViewReader { proxy in
                 self.content
                     .navigationBarItems(trailing: self.permissionsButton)
                     .navigationBarTitle("Countries")
                     .navigationBarHidden(self.countriesSearch.keyboardHeight > 0)
                     .animation(.easeOut(duration: 0.3))
             }
-            .navigationViewStyle(DoubleColumnNavigationViewStyle())
         }
+        .navigationViewStyle(StackNavigationViewStyle())
         .modifier(LocaleReader(container: localeContainer))
         .onReceive(keyboardHeightUpdate) { self.countriesSearch.keyboardHeight = $0 }
-        .onReceive(routingUpdate) { self.routingState = $0 }
         .onReceive(canRequestPushPermissionUpdate) { self.canRequestPushPermission = $0 }
         .onReceive(inspection.notice) { self.inspection.visit(self, $0) }
     }
@@ -150,18 +160,20 @@ private extension CountriesList {
             }
             List(countries) { country in
                 NavigationLink(
-                    destination: self.detailsView(country: country),
+                    destination: LazyView { self.detailsView(country: country) },
                     tag: country.alpha3Code,
-                    selection: self.routingBinding.countryDetails) {
+                    selection: viewModel.routingBinding.countryDetails) {
                         CountryCell(country: country)
                     }
+                    .id(country.alpha3Code)
             }
             .id(countries.count)
         }.padding(.bottom, bottomInset)
     }
     
     func detailsView(country: Country) -> some View {
-        CountryDetails(country: country)
+        let model = CountryDetailsViewModel(viewModel.appStatePublisher)
+        return CountryDetails(country: country, viewModel: model)
     }
     
     var bottomInset: CGFloat {
@@ -170,6 +182,15 @@ private extension CountriesList {
         } else {
             return countriesSearch.keyboardHeight
         }
+    }
+}
+
+struct LazyView<Content: View>: View {
+    
+    let content: () -> Content
+    
+    var body: some View {
+        content()
     }
 }
 
@@ -184,19 +205,10 @@ extension CountriesList {
 
 // MARK: - Routing
 
-extension CountriesList {
-    struct Routing: Equatable {
-        var countryDetails: Country.Code?
-    }
-}
 
 // MARK: - State Updates
 
 private extension CountriesList {
-    
-    var routingUpdate: AnyPublisher<Routing, Never> {
-        injected.appState.updates(for: \.routing.countriesList)
-    }
     
     var keyboardHeightUpdate: AnyPublisher<CGFloat, Never> {
         injected.appState.updates(for: \.system.keyboardHeight)
@@ -209,6 +221,7 @@ private extension CountriesList {
     }
 }
 
+/*
 #if DEBUG
 struct CountriesList_Previews: PreviewProvider {
     static var previews: some View {
@@ -217,3 +230,4 @@ struct CountriesList_Previews: PreviewProvider {
     }
 }
 #endif
+*/

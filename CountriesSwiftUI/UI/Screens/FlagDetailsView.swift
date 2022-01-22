@@ -1,5 +1,5 @@
 //
-//  ModalDetailsView.swift
+//  FlagDetailsView.swift
 //  CountriesSwiftUI
 //
 //  Created by Alexey Naumov on 26.10.2019.
@@ -7,9 +7,15 @@
 //
 
 import SwiftUI
+import Combine
 
-struct ModalDetailsView: View {
+struct FlagDetailsView: View {
     
+    @Environment(\.injected) private var injected
+  /*  @State private var routingState: Routing = .init()
+    private var routingBinding: Binding<Routing> {
+        $routingState.dispatched(to: injected.appState, \.routing.countryFlag)
+    } */
     let country: Country
     @Binding var isDisplayed: Bool
     let inspection = Inspection<Self>()
@@ -29,9 +35,8 @@ struct ModalDetailsView: View {
             }
             .navigationBarTitle(Text(country.name), displayMode: .inline)
         }
-        .navigationViewStyle(StackNavigationViewStyle())
         .onReceive(inspection.notice) { self.inspection.visit(self, $0) }
-        .attachEnvironmentOverrides()
+        //.attachEnvironmentOverrides()
     }
     
     private var closeButton: some View {
@@ -41,6 +46,22 @@ struct ModalDetailsView: View {
     }
 }
 
+/*
+extension ModalDetailsView {
+    struct Routing: Equatable {
+        var showFlag: Bool = false
+    }
+}
+
+extension ModalDetailsView {
+    var routingUpdate: AnyPublisher<Routing, Never> {
+        injected.appState.updates(for: \.routing.countryFlag)
+    }
+}
+ 
+ */
+
+/*
 #if DEBUG
 struct ModalDetailsView_Previews: PreviewProvider {
     
@@ -52,3 +73,4 @@ struct ModalDetailsView_Previews: PreviewProvider {
     }
 }
 #endif
+*/

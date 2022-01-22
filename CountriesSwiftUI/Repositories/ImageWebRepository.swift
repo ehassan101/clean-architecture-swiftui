@@ -66,7 +66,7 @@ struct RealImageWebRepository: ImageWebRepository {
         urlRequest.httpMethod = "POST"
         let body: [String: Any] = [
             "file": (imported.urlString as NSString).lastPathComponent,
-            "token": imported.ajaxToken,
+            /*"token": imported.ajaxToken,*/
             "width": width
         ]
         let bodyString = body.map { $0.key + "=" + "\($0.value)" }.joined(separator: "&")
@@ -108,19 +108,20 @@ extension ImageConversion {
     struct Import {
         
         let urlString: String
-        let ajaxToken: String
+        //let ajaxToken: String
         let urlRequest: URLRequest
         
         init(data: Data?, urlRequest: URLRequest) throws {
             guard let data = data, let string = String(data: data, encoding: .utf8),
                 let elementWithURL = string.firstMatch(pattern: #"<form class="form ajax-form".*\.svg">"#),
-                let conversionURL = elementWithURL.firstMatch(pattern: #"https.*\.svg"#),
+                let conversionURL = elementWithURL.firstMatch(pattern: #"https.*\.svg"#) /*,
                 let ajaxTokenElement = string.firstMatch(pattern: #"name=\"file\"><input .*name=\"token\".*>"#),
-                let dirtyToken = ajaxTokenElement.firstMatch(pattern: #"value="([a-z]|[0-9])*"#)
+                let dirtyToken = ajaxTokenElement.firstMatch(pattern: #"value="([a-z]|[0-9])*"#) */
                 else { throw APIError.imageProcessing([urlRequest]) }
             self.urlString = conversionURL
-            self.ajaxToken = String(dirtyToken.suffix(from: dirtyToken.index(dirtyToken.startIndex, offsetBy: 7)))
+          /*  self.ajaxToken = String(dirtyToken.suffix(from: dirtyToken.index(dirtyToken.startIndex, offsetBy: 7))) */
             self.urlRequest = urlRequest
+            print("^^^^^^^^^^ \(urlRequest)")
         }
     }
 }

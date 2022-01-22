@@ -15,9 +15,12 @@ struct ContentView: View {
     private let container: DIContainer
     private let isRunningTests: Bool
     
+    var countriesListViewModel: CountriesListViewModel
+    
     init(container: DIContainer, isRunningTests: Bool = ProcessInfo.processInfo.isRunningTests) {
         self.container = container
         self.isRunningTests = isRunningTests
+        self.countriesListViewModel = CountriesListViewModel(container.appState)
     }
     
     var body: some View {
@@ -25,7 +28,7 @@ struct ContentView: View {
             if isRunningTests {
                 Text("Running unit tests")
             } else {
-                CountriesList()
+                CountriesList(viewModel: countriesListViewModel)
                     .attachEnvironmentOverrides(onChange: onChangeHandler)
                     .inject(container)
             }

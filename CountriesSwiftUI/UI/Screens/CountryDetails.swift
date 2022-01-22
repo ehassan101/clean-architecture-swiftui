@@ -16,21 +16,36 @@ struct CountryDetails: View {
     @Environment(\.locale) var locale: Locale
     @Environment(\.injected) private var injected: DIContainer
     @State private var details: Loadable<Country.Details>
-    @State private var routingState: Routing = .init()
-    private var routingBinding: Binding<Routing> {
-        $routingState.dispatched(to: injected.appState, \.routing.countryDetails)
-    }
+    @ObservedObject var viewModel: CountryDetailsViewModel
+  /*  @State private var routingState: Routing.CountryDetails = .init()
+    private var routingBinding: Binding<Routing.CountryDetails> {
+      // return $routingState.dispatched(to: injected.appState, \.routing.countriesList)
+        Binding {
+            return routingState
+        } set: {
+            injected.appState[\.routing.countryDetails] = $0
+            //routingState = $0
+        }
+
+    } */
+    
     let inspection = Inspection<Self>()
     
-    init(country: Country, details: Loadable<Country.Details> = .notRequested) {
+    init(country: Country, details: Loadable<Country.Details> = .notRequested, viewModel: CountryDetailsViewModel) {
         self.country = country
+        self.viewModel = viewModel
         self._details = .init(initialValue: details)
+        print("........... View CountryDetails")
     }
     
     var body: some View {
         content
             .navigationBarTitle(country.name(locale: locale))
-            .onReceive(routingUpdate) { self.routingState = $0 }
+           /* .onReceive(routingUpdate) {
+                guard self.routingState != $0 else { return }
+                print(".onReceive(routingUpdate) new: \($0), self: \(self.routingState)")
+                self.routingState = $0
+            } */
             .onReceive(inspection.notice) { self.inspection.visit(self, $0) }
     }
     
@@ -52,8 +67,9 @@ private extension CountryDetails {
             .load(countryDetails: $details, country: country)
     }
     
-    func showCountryDetailsSheet() {
-        injected.appState[\.routing.countryDetails.detailsSheet] = true
+    func presentFlagSheet() {
+        injected.appState[\.routing.countryDetails.flag] = true
+        print("presentFlagSheet() \(injected.appState.value)")
     }
 }
 
@@ -99,8 +115,12 @@ private extension CountryDetails {
             }
         }
         .listStyle(GroupedListStyle())
-        .sheet(isPresented: routingBinding.detailsSheet,
-               content: { self.modalDetailsView() })
+        .sheet(isPresented: viewModel.routingBinding.flag) {
+            injected.appState[\.routing.countryDetails.flag] = false
+        } content: {
+            flagDetailsView()
+        }
+
     }
     
     func flagView(url: URL) -> some View {
@@ -109,7 +129,8 @@ private extension CountryDetails {
             SVGImageView(imageURL: url)
                 .frame(width: 120, height: 80)
                 .onTapGesture {
-                    self.showCountryDetailsSheet()
+                    //self.presentFlagSheet()
+                    viewModel.didRequestFlag = true
                 }
             Spacer()
         }
@@ -134,7 +155,7 @@ private extension CountryDetails {
     func neighborsSectionView(neighbors: [Country]) -> some View {
         Section(header: Text("Neighboring countries")) {
             ForEach(neighbors) { country in
-                NavigationLink(destination: self.neighbourDetailsView(country: country)) {
+                NavigationLink(destination: LazyView { self.neighbourDetailsView(country: country) } ) {
                     DetailRow(leftLabel: Text(country.name(locale: self.locale)), rightLabel: "")
                 }
             }
@@ -142,12 +163,18 @@ private extension CountryDetails {
     }
     
     func neighbourDetailsView(country: Country) -> some View {
-        CountryDetails(country: country)
+        let model = CountryDetailsViewModel(viewModel.appStatePublisher)
+        return CountryDetails(country: country, viewModel: model)
     }
     
-    func modalDetailsView() -> some View {
+  /*  func modalDetailsView() -> some View {
         ModalDetailsView(country: country,
                          isDisplayed: routingBinding.detailsSheet)
+            .inject(injected)
+    } */
+    
+    func flagDetailsView() -> some View {
+        FlagDetailsView(country: country, isDisplayed: viewModel.routingBinding.flag)
             .inject(injected)
     }
 }
@@ -162,20 +189,28 @@ private extension Country.Currency {
 
 // MARK: - Routing
 
+/*
 extension CountryDetails {
     struct Routing: Equatable {
-        var detailsSheet: Bool = false
+        //var detailsSheet: Bool = false
+        var flag: Bool = false
     }
 }
+ */
 
 // MARK: - State Updates
 
 private extension CountryDetails {
     
-    var routingUpdate: AnyPublisher<Routing, Never> {
-        injected.appState.updates(for: \.routing.countryDetails)
+    var routingUpdate: AnyPublisher<Routing.CountryDetails, Never> {
+        let p = injected.appState.updates(for: \.routing.countryDetails)
+        print(".onReceive routingUpdate: AnyPublisher, \(p)")
+        
+        return p
     }
 }
+
+/*
 
 // MARK: - Preview
 
@@ -187,3 +222,4 @@ struct CountryDetails_Previews: PreviewProvider {
     }
 }
 #endif
+*/

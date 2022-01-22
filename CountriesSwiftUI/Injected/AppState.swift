@@ -27,10 +27,12 @@ extension AppState {
     }
 }
 
+
+
 extension AppState {
     struct ViewRouting: Equatable {
-        var countriesList = CountriesList.Routing()
-        var countryDetails = CountryDetails.Routing()
+        var countriesList = Routing.CountriesList()
+        var countryDetails = Routing.CountryDetails()
     }
 }
 

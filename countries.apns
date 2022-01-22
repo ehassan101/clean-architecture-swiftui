@@ -1,0 +1,10 @@
+{
+    "Simulator Target Bundle": "com.countries.swiftui",
+    "aps": {
+        "alert": {
+            "body": "Gerard added something new - take a look",
+            "title": "Country Code"
+        },
+        "country": "AFG"
+    }
+}
